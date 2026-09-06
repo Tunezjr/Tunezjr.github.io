@@ -1,0 +1,39 @@
+/* Single-line Stripe tickers inside cards */
+.scroll-line {
+  margin-top: 10px;
+  overflow: hidden;
+}
+.ticker-track {
+  display: flex;
+  width: max-content;
+  gap: 2rem;
+  padding-right: 2rem;
+  animation: ticker 36s linear infinite;
+}
+.ticker-track--rev { animation-name: ticker-rev; }
+.ticker-track--slow { animation-duration: 48s; }
+.ticker-track span {
+  flex: 0 0 auto;
+  white-space: nowrap;
+  font-size: 14px;
+  font-style: italic;
+  color: var(--light-text-secondary);
+}
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@keyframes ticker-rev {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track,
+  .ticker-track--rev { animation: none; }
+}
+.benefit,
+.how__step,
+.security-card,
+.faq__item {
+  overflow: hidden;
+}

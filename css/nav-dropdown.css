@@ -1,0 +1,149 @@
+/* ==========================================================================
+   NAV DROPDOWN — styles
+   Pairs with nav-dropdown.js. Import after design-tokens.css.
+   ========================================================================== */
+
+.nav {
+  position: relative;
+}
+
+.nav-trigger {
+  background: none;
+  border: none;
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-body);
+  color: var(--light-text-secondary);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+
+.nav-trigger:hover {
+  color: var(--light-text-primary);
+}
+
+.nav-trigger:focus-visible {
+  outline: 2px solid var(--indigo);
+  outline-offset: 2px;
+}
+
+.nav-trigger[aria-expanded="true"] {
+  color: var(--indigo);
+  font-weight: var(--font-weight-medium);
+}
+
+.nav-trigger::after {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg);
+  transition: transform var(--duration-fast) var(--ease-standard);
+  flex-shrink: 0;
+}
+
+.nav-trigger[aria-expanded="true"]::after {
+  transform: rotate(-135deg);
+}
+
+[data-nav-panel-container] {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  z-index: 30;
+  transform-origin: top left;
+  will-change: transform;
+}
+
+.nav-panel {
+  background: var(--light-surface);
+  border: 1px solid var(--border-subtle-light);
+  border-radius: var(--radius-md);
+  box-shadow: 0 12px 32px rgba(13, 37, 61, 0.12);
+  padding: var(--space-3);
+  min-width: 320px;
+  max-width: min(90vw, 560px);
+  max-height: min(70vh, 520px);
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.nav-panel[hidden] {
+  display: none !important;
+}
+
+[data-nav-backdrop] {
+  position: fixed;
+  inset: 0;
+  background: rgba(13, 37, 61, 0.15);
+  z-index: 20;
+  border: none;
+  padding: 0;
+  cursor: default;
+}
+
+[data-nav-backdrop][hidden] {
+  display: none !important;
+}
+
+[data-theme="dark"] .nav-trigger {
+  color: var(--dark-text-secondary);
+}
+
+[data-theme="dark"] .nav-trigger:hover {
+  color: var(--dark-text-primary);
+}
+
+[data-theme="dark"] .nav-trigger[aria-expanded="true"] {
+  color: var(--lavender);
+}
+
+[data-theme="dark"] .nav-trigger:focus-visible {
+  outline-color: var(--lavender);
+}
+
+[data-theme="dark"] .nav-panel {
+  background: var(--dark-surface);
+  border-color: var(--border-subtle-dark);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+  color: var(--dark-text-primary);
+}
+
+[data-theme="dark"] [data-nav-backdrop] {
+  background: rgba(0, 0, 0, 0.45);
+}
+
+@media (max-width: 639px) {
+  [data-nav-panel-container] {
+    position: static;
+    will-change: auto;
+  }
+
+  .nav-panel {
+    min-width: 0;
+    max-width: none;
+    width: 100%;
+    max-height: none;
+    border-radius: 0;
+    box-shadow: none;
+    border-left: none;
+    border-right: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-trigger,
+  .nav-trigger::after {
+    transition: none;
+  }
+
+  [data-nav-panel-container] {
+    will-change: auto;
+  }
+}
